@@ -16,7 +16,6 @@
 
     <div class="calendar-hours">
         @for ($i = 0; $i < 24; $i++)
-            {{-- IF i is < 10, add a 0 --}}
             @if($i < 10)
                 <div class="calendar-hour">{{ "0" . $i }}</div>
             @else
