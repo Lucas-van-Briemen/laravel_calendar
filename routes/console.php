@@ -21,7 +21,6 @@ Artisan::command('agenda-item-reminder', function () {
 
     $this->info('Found ' . $agendaItems->count() . ' agenda items that start between: ' . now()->format('Y-m-d H:i:s')) . ' and ' . now()->addMinutes(30)->format('Y-m-d H:i:s');
 
-
     // Send an email to the user
     foreach ($agendaItems as $agendaItem) {
         $userID = $agendaItem->user_id;
