@@ -14,7 +14,7 @@
     <meta name="format-detection" content="email=no" />
     <meta name="x-apple-disable-message-reformatting" />
     <link href="https://fonts.googleapis.com/css?family=Figtree:ital,wght@0,400;0,400" rel="stylesheet" />
-    <title>Untitled</title>
+    <title>Agenda Item Reminder</title>
     <!-- Made with Postcards Email Builder by Designmodo -->
     <style>
         html,
