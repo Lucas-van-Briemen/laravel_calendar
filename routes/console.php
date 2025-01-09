@@ -19,7 +19,7 @@ Artisan::command('agenda-item-reminder', function () {
         ->where('start', '>=', now()->addMinutes(60))
         ->get();
 
-    $this->info('Found ' . $agendaItems->count() . ' agenda items that start between: ' . now()->addMinutes(30))->format('Y-m-d H:i:s')) . ' and ' . now()->addMinutes(90)->format('Y-m-d H:i:s');
+    $this->info('Found ' . $agendaItems->count() . ' agenda items that start between: ' . now()->addMinutes(30)->format('Y-m-d H:i:s')) . ' and ' . now()->addMinutes(90)->format('Y-m-d H:i:s');
 
     // Send an email to the user
     foreach ($agendaItems as $agendaItem) {
