@@ -50,22 +50,29 @@
         }
     }
 
-    .week-days-overview{
-        width: calc(70vw - 2.5vw);
+    .week-days-overview-wrapper{
+        width: 70vw;
+        height: 100%;
 
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        .week-days-overview{
+            width: calc(70vw - 2.5vw);
+            height: 100%;
+            margin-left: 2.5vw;
 
-        .week-day-overview{
-            background-color: var(--background-color-two);
-            border-radius: 8px;
-            width: 80%;
-            height: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: auto;
-            color: var(--gray-text);
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+
+            .week-day-overview{
+                background-color: var(--background-color-two);
+                border-radius: 8px;
+                width: 80%;
+                height: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: auto;
+                color: var(--gray-text);
+            }
         }
     }
 }
@@ -78,13 +85,12 @@
 
     .calendar-manager {
         width: 20vw;
-        background-color: blue;
+        background-color: var(--background-color-one);
     }
 
     .calendar-wrapper {
         width: 70vw;
         display: flex;
-        margin: auto;
         justify-content: space-between;
         position: relative;
 
