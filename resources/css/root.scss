@@ -1,0 +1,27 @@
+:root {
+    --background-color: rgb(243, 244, 246);
+    --background-color-one: rgb(255, 255, 255);
+    --background-color-two: rgb(255, 255, 255);
+
+    --input: var(--background-color);
+
+    --header-text: rgb(17, 24, 39);
+    --gray-text: rgb(101, 117, 134);
+    --button-text: var(--background-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: rgb(17, 24, 39);
+        --background-color-one: rgb(31, 41, 55);
+        --background-color-two: rgb(55, 65, 81);
+
+        --input: var(--background-color);
+
+        --header-text: rgb(244, 244, 244);
+        --gray-text: rgb(156, 163, 175);
+        --button-text: var(--background-color);
+    }
+}
+
+

@@ -1,0 +1,122 @@
+.calendar-menu {
+    width: 95vw;
+    background-color: var(--background-color-one);
+    border-radius: 25px;
+    margin: auto;
+    margin-top: 2.5vh;
+
+    height: 12.5vh;
+
+    display: flex;
+
+    justify-content: space-evenly;
+
+    .week-selecter{
+        width: 20vw;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a{
+            text-decoration: none;
+            color: var(--gray-text);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--background-color-two);
+
+            width: 30%;
+            height: 50%;
+
+            margin: 1%;
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        a:first-child{
+            border-radius: 16px 8px 8px 16px;
+        }
+
+        a:last-child{
+            border-radius: 8px 16px 16px 8px;
+        }
+
+        a:hover{
+            background-color: var(--background-color);
+            border-radius: 32px;
+            color: var(--header-text);
+        }
+    }
+
+    .week-days-overview{
+        width: calc(70vw - 2.5vw);
+
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+        .week-day-overview{
+            background-color: var(--background-color-two);
+            border-radius: 8px;
+            width: 80%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            color: var(--gray-text);
+        }
+    }
+}
+
+.calendar-overview{
+    width: 95vw;
+    display: flex;
+    margin: auto;
+    justify-content: space-evenly;
+
+    .calendar-manager {
+        width: 20vw;
+        background-color: blue;
+    }
+
+    .calendar-wrapper {
+        width: 70vw;
+        display: flex;
+        margin: auto;
+        justify-content: space-between;
+
+        height: 70vh;
+        overflow-y: scroll;
+
+        scrollbar-width: none;
+
+        .calendar-hours {
+            width: 2.5vw;
+            height: calc(24 * 40px);
+
+            background-color: var(--background-color-two);
+
+            display: grid;
+            grid-template-rows: repeat(24, 40px);
+        }
+
+        .calendar {
+            background-color: red !important;
+
+            width: calc(100% - 2.5vw);
+            height: calc(24 * 40px);
+
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(calc(4 * 24), 10px);
+        }
+    }
+
+
+    .agenda-item-new {
+        background-color: green;
+    }
+}
+
