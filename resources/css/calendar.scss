@@ -76,8 +76,27 @@
     justify-content: space-evenly;
 
     .calendar-manager {
+        position: relative;
         width: 20vw;
         background-color: var(--background-color-one);
+
+        border-radius: 0 0 16px 16px;
+
+        ::before, ::after {
+            content: "";
+            position: absolute;
+            top: -2px;
+            width: 16px;
+            height: 16px;
+            left: -16px;
+            background: radial-gradient(circle at bottom left, transparent 15px, var(--background-color-one) 16px);
+        }
+
+        ::after {
+            left: auto;
+            right: -16px;
+            background: radial-gradient(circle at bottom right, transparent 15px, var(--background-color-one) 16px);
+        }
     }
 
     .calendar-wrapper {

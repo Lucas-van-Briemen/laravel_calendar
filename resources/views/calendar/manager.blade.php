@@ -1,3 +1,6 @@
 <div class="calendar-manager">
-    manager
+    <div class="calendar-manager-header">
+
+    </div>
+
 </div>
