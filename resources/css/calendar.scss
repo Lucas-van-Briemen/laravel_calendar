@@ -1,83 +1,75 @@
 .calendar-menu {
     width: 95vw;
-    background-color: var(--background-color-one);
-    border-radius: 25px;
+    height: 12.5vh;
     margin: auto;
     margin-top: 2.5vh;
-
-    height: 12.5vh;
-
     display: flex;
-
     justify-content: space-evenly;
+    background-color: var(--background-color-one);
+    border-radius: 25px;
 
-    .week-selecter{
+    .week-selecter {
         width: 20vw;
-
         display: flex;
         justify-content: center;
         align-items: center;
 
-        a{
-            text-decoration: none;
-            color: var(--gray-text);
-
+        a {
+            width: 30%;
+            height: 50%;
+            margin: 1%;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: var(--background-color-two);
-
-            width: 30%;
-            height: 50%;
-
-            margin: 1%;
+            text-decoration: none;
+            color: var(--gray-text);
             border-radius: 8px;
             transition: all 0.2s ease-in-out;
         }
 
-        a:first-child{
+        a:first-child {
             border-radius: 16px 8px 8px 16px;
         }
 
-        a:last-child{
+        a:last-child {
             border-radius: 8px 16px 16px 8px;
         }
 
-        a:hover{
+        a:hover {
             background-color: var(--background-color);
             border-radius: 32px;
             color: var(--header-text);
         }
     }
 
-    .week-days-overview-wrapper{
+    .week-days-overview-wrapper {
         width: 70vw;
         height: 100%;
 
-        .week-days-overview{
+        .week-days-overview {
             width: calc(70vw - 2.5vw);
             height: 100%;
             margin-left: 2.5vw;
-
             display: grid;
             grid-template-columns: repeat(7, 1fr);
 
-            .week-day-overview{
-                background-color: var(--background-color-two);
-                border-radius: 8px;
+            .week-day-overview {
                 width: 80%;
                 height: 50%;
+                margin: auto;
+                background-color: var(--background-color-two);
+                border-radius: 8px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin: auto;
                 color: var(--gray-text);
             }
         }
     }
 }
 
-.calendar-overview{
+.calendar-overview {
     width: 95vw;
     display: flex;
     margin: auto;
@@ -89,18 +81,14 @@
     }
 
     .calendar-wrapper {
+        height: 75vh;
         width: 70vw;
         display: flex;
         justify-content: space-between;
         position: relative;
-
-        height: 70vh;
         overflow-y: scroll;
-
         scrollbar-width: none;
-
         background-color: var(--background-color-one);
-
         border-radius: 0 0 16px 16px;
 
         .calendar-lines {
@@ -109,18 +97,16 @@
             left: 0;
             width: 100%;
             height: calc(24 * 40px);
-
             z-index: 0;
 
-            .calendar-day-line-wrapper{
+            .calendar-day-line-wrapper {
                 width: calc(100% - 2.5vw);
                 height: 100%;
                 display: grid;
                 grid-template-columns: repeat(7, 1fr);
-                grid-template-rows: repeat(1, 100%);
                 margin-left: 2.5vw;
 
-                .calendar-day-line{
+                .calendar-day-line {
                     width: 1px;
                     height: 100%;
                     background-color: var(--background-color-two);
@@ -135,33 +121,29 @@
                 left: 2.5vw;
                 width: calc(100% - 2.5vw);
                 height: 100%;
-
                 display: grid;
                 grid-template-columns: repeat(1, 100%);
                 grid-template-rows: repeat(24, 1fr);
 
-                .calendar-hour-line{
+                .calendar-hour-line {
                     width: 100%;
                     height: 2px;
                     background-color: var(--background-color-two);
                     z-index: 0;
                     margin-left: -1px;
                 }
-
             }
         }
 
         .calendar-hours {
             width: 2.5vw;
             height: calc(24 * 40px);
-
             display: grid;
             grid-template-rows: repeat(24, 40px);
-
             z-index: 10;
             color: var(--gray-text);
 
-            .calendar-hour{
+            .calendar-hour {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -171,7 +153,7 @@
                 width: 95%;
             }
 
-            .calendar-hour:first-child{
+            .calendar-hour:first-child {
                 margin-top: 0;
                 opacity: 0;
             }
@@ -180,11 +162,9 @@
         .calendar {
             width: calc(100% - 2.5vw);
             height: calc(24 * 40px);
-
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             grid-template-rows: repeat(calc(4 * 24), 10px);
-
             z-index: 10;
         }
     }
@@ -193,4 +173,3 @@
         background-color: green;
     }
 }
-
