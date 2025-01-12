@@ -27,8 +27,9 @@
 
     <div class="calendar">
         @foreach($agendaItems as $agendaItem)
-            <div class="hidden ">
-                <h2>{{ $agendaItem->title }}</h2>
+            <div class="calendar-item"
+                style="grid-row: {{ $agendaItem["startRow"] }} / {{ $agendaItem["endRow"] }}; grid-column: {{ $agendaItem["startColumn"] }} / {{ $agendaItem["endColumn"] }};"
+            >
             </div>
         @endforeach
     </div>
