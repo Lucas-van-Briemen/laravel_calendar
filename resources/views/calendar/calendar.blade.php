@@ -1,8 +1,27 @@
 {{-- Show all the agenda items --}}
 <div class="calendar-wrapper">
+    <div class="calendar-lines">
+        <div class="calendar-hour-line-wrapper">
+            @for ($i = 0; $i < 24; $i++)
+                <div class="calendar-hour-line"></div>
+            @endfor
+        </div>
+
+        <div class="calendar-day-line-wrapper">
+            @for ($i = 0; $i < 7; $i++)
+                <div class="calendar-day-line"></div>
+            @endfor
+        </div>
+    </div>
+
     <div class="calendar-hours">
         @for ($i = 0; $i < 24; $i++)
-            <div class="calendar-hour">{{ $i }}</div>
+            {{-- IF i is < 10, add a 0 --}}
+            @if($i < 10)
+                <div class="calendar-hour">{{ "0" . $i }}</div>
+            @else
+                <div class="calendar-hour">{{ $i }}</div>
+            @endif
         @endfor
     </div>
 
