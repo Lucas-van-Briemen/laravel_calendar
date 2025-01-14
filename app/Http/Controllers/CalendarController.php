@@ -64,7 +64,7 @@ class CalendarController extends Controller
 
         $request->user()->agendaItems()->create($validatedData);
 
-        return response()->json(['message' => 'Agenda item created successfully'], Response::HTTP_CREATED);
+        return redirect()->route('calendar.index');
     }
 
     /**

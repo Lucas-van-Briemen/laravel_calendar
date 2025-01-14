@@ -33,7 +33,6 @@ function createAgendaItem(x, y) {
 
     const agendaItem = document.createElement('div');
     agendaItem.classList.add('agenda-item-new');
-
     agendaGrid.appendChild(agendaItem);
 
     const startPosition = calculateGridPosition(mouseStart.x, mouseStart.y);
@@ -47,33 +46,78 @@ function createAgendaItem(x, y) {
 
     agendaItem.innerHTML = `
         <div class="input-wrapper">
-            <input type="text" id="title" class="form-control" placeholder=" ">
+            <input type="text" id="new-item-title" class="form-control" placeholder=" ">
             <label for="title" class="form-label">Title</label>
         </div>
 
         <div class="input-wrapper">
-            <textarea id="description" class="form-control" placeholder=" "></textarea>
+            <textarea id="new-item-description" class="form-control" placeholder=" "></textarea>
             <label for="description" class="form-label">Description</label>
         </div>
 
         <div class="input-wrapper">
-            <input type="datetime-local" id="start" class="form-control" placeholder=" ">
+            <input type="datetime-local" id="new-item-start" class="form-control" placeholder=" ">
             <label for="start" class="form-label">Start</label>
         </div>
 
         <div class="input-wrapper">
-            <input type="datetime-local" id="end" class="form-control" placeholder=" ">
+            <input type="datetime-local" id="new-item-end" class="form-control" placeholder=" ">
             <label for="end" class="form-label">End</label>
         </div>
 
-        <button class="btn btn-primary">Save</button>
+        <button class="btn btn-primary" id="new-item-save">Save</button>
     `;
 
     const startDateTime = calculateDateTime(startPosition.column, startPosition.row - 1);
     const endDateTime = calculateDateTime(endPosition.column, endPosition.row);
 
-    document.querySelector("#start").value = startDateTime;
-    document.querySelector("#end").value = endDateTime;
+    document.querySelector("#new-item-start").value = startDateTime;
+    document.querySelector("#new-item-end").value = endDateTime;
+
+
+    document.querySelector("#new-item-title").addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            document.querySelector("#new-item-description").focus();
+        }
+    });
+
+    document.querySelector("#new-item-description").addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            document.querySelector("#new-item-start").focus();
+        }
+    });
+
+    document.querySelector("#new-item-start").addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            document.querySelector("#new-item-end").focus();
+        }
+    });
+
+    document.querySelector("#new-item-end").addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            document.querySelector("#new-item-title").focus();
+        }
+    });
+
+    document.querySelector("#new-item-save").addEventListener('click', (e) => {
+        const title = document.querySelector("#new-item-title").value;
+        const description = document.querySelector("#new-item-description").value;
+        const start = document.querySelector("#new-item-start").value;
+        const end = document.querySelector("#new-item-end").value;
+
+        document.querySelector("#title").value = title;
+        document.querySelector("#description").value = description;
+        document.querySelector("#start").value = start;
+        document.querySelector("#end").value = end;
+
+        document.querySelector("#save").click();
+
+        console.log(title);
+        console.log(description);
+        console.log(start);
+        console.log(end);
+        console.log(document.querySelector("#save"));
+    });
 }
 
 function removeAllUncreatedAgendaItems() {

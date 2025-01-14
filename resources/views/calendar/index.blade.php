@@ -13,12 +13,12 @@
 
     <form action="{{ route('calendar.store') }}" method="POST" hidden>
         @csrf
-        <input type="text" name="title" placeholder="Title">
-        <input type="text" name="description" placeholder="Description">
+        <input type="text" name="title" placeholder="Title" id="title">
+        <input type="text" name="description" placeholder="Description" id="description">
         <input type="datetime-local" name="start" placeholder="Start" id="start">
         <input type="datetime-local" name="end" placeholder="End" id="end">
 
-        <button type="submit">Create</button>
+        <button type="submit" id="save">Create</button>
     </form>
 
 </x-app-layout>
