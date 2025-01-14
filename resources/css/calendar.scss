@@ -187,8 +187,15 @@
             z-index: 10;
         }
     }
-
     .agenda-item-new {
-        background-color: green;
+        background-color: var(--background-color-two);
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .agenda-item, .agenda-item-new {
+        background-color: var(--background-color-two);
+        border-radius: 8px;
+        user-select: none;
     }
 }

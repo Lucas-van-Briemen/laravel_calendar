@@ -45,6 +45,30 @@ function createAgendaItem(x, y) {
     agendaItem.style.gridColumnEnd = endPosition.column + 1;
     agendaItem.style.gridRowEnd = endPosition.row + 1;
 
+    agendaItem.innerHTML = `
+        <div class="input-wrapper">
+            <input type="text" id="title" class="form-control" placeholder=" ">
+            <label for="title" class="form-label">Title</label>
+        </div>
+
+        <div class="input-wrapper">
+            <textarea id="description" class="form-control" placeholder=" "></textarea>
+            <label for="description" class="form-label">Description</label>
+        </div>
+
+        <div class="input-wrapper">
+            <input type="datetime-local" id="start" class="form-control" placeholder=" ">
+            <label for="start" class="form-label">Start</label>
+        </div>
+
+        <div class="input-wrapper">
+            <input type="datetime-local" id="end" class="form-control" placeholder=" ">
+            <label for="end" class="form-label">End</label>
+        </div>
+
+        <button class="btn btn-primary">Save</button>
+    `;
+
     const startDateTime = calculateDateTime(startPosition.column, startPosition.row - 1);
     const endDateTime = calculateDateTime(endPosition.column, endPosition.row);
 
@@ -78,6 +102,7 @@ function calculateRelativePosition(pressX, pressY) {
     const y = pressY - agendaRect.top + scrollTop;
     return { x, y };
 }
+
 function calculateDateTime(column, row) {
     const DateTime = new Date();
 

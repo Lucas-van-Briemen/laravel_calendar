@@ -25,3 +25,45 @@
 }
 
 
+.input-wrapper{
+    max-width: 100%;
+    position: relative;
+
+    margin: 1rem;
+
+    // If the input is in focus, place the label above the input
+    // Also do this if the input has a value
+
+    label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: var(--gray-text);
+        padding: .5rem 0 0 .75rem;
+        z-index: 10;
+
+        transition: all .2s;
+    }
+
+
+    input, textarea {
+        width: 100%;
+
+        max-width: 100%;
+        background-color: var(--background-color-two);
+        border: 1px solid var(--input);
+        color: var(--header-text);
+
+        border-radius: 8px;
+
+        &:focus+label,
+        &:not(:placeholder-shown)+label {
+            color: var(--header-text);
+            transform: translateY(-.5rem);
+            font-size: .75rem;
+            background-color: var(--input);
+            padding: 0 .5rem;
+            border-radius: 8px;
+        }
+    }
+}

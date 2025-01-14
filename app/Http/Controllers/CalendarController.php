@@ -104,7 +104,6 @@ class CalendarController extends Controller
         $weekDays = [];
 
         for ($i = 0; $i < 7; $i++) {
-
             $format = 'D, d M';
 
             if (date('Y') != date('Y', strtotime($date . " +$i day"))) {
@@ -127,11 +126,11 @@ class CalendarController extends Controller
             $startColumn = 0;
             $endColumn = 0;
 
-            $startRow = (date('H', strtotime($agendaItem->start)) * 4);
-            $startRow = $startRow + (round(date('i', strtotime($agendaItem->start)) / 60));
+            $startRow = (date('H', strtotime($agendaItem->start)) * 4) + 1;
+            $startRow = $startRow + (round(date('i', strtotime($agendaItem->start)) / 15));
 
-            $endRow = (date('H', strtotime($agendaItem->end)) * 4);
-            $endRow = $endRow + (round(date('i', strtotime($agendaItem->end)) / 60));
+            $endRow = (date('H', strtotime($agendaItem->end)) * 4) + 1;
+            $endRow = $endRow + (round(date('i', strtotime($agendaItem->end)) / 15));
 
             $startColumn = date('N', strtotime($agendaItem->start));
             $endColumn = date('N', strtotime($agendaItem->end));
