@@ -59,17 +59,7 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request data
-        $validatedData = $request->validate([
-            'title' => '',
-            'description' => '',
-            'start' => '',
-            'end' => ''
-        ]);
-
-        $request->user()->agendaItems()->create($validatedData);
-
-        return redirect()->route('calendar.index');
+        //
     }
 
     /**
