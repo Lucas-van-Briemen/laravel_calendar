@@ -32,6 +32,12 @@
             >
                 <h1 class="agenda-item-title">{{ $agendaItem["title"] }}</h1>
                 <p class="agenda-item-description">{{ $agendaItem["description"] }}</p>
+
+                <div class="agenda-item-time">
+                </div>
+
+                <div class="agenda-item-actions">
+                </div>
             </div>
         @endforeach
     </div>

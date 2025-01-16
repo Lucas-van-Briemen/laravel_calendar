@@ -16,7 +16,11 @@
     <div class="week-days-overview-wrapper">
         <div class="week-days-overview">
             @foreach($weekDays as $weekDay)
-                <div class="week-day-overview">{{ $weekDay }}</div>
+                @if($currentDate === $weekDay)
+                    <div class="week-day-overview week-day-overview-current">{{ $weekDay }}</div>
+                @else
+                    <div class="week-day-overview">{{ $weekDay }}</div>
+                @endif
             @endforeach
         </div>
     </div>

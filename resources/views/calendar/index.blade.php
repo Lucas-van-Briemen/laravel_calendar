@@ -11,7 +11,7 @@
         @include('calendar.calendar')
     </div>
 
-    <form action="{{ route('calendar.store') }}" method="POST" hidden>
+    <form action="{{ route('agenda-items.store') }}" method="POST" hidden>
         @csrf
         <input type="text" name="title" placeholder="Title" id="title">
         <input type="text" name="description" placeholder="Description" id="description">

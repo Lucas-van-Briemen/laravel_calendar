@@ -10,11 +10,17 @@ let mouseStart = { x: 0, y: 0 };
 agendaGrid.addEventListener('mousedown', (e) => {
     mouseStart = calculateRelativePosition(e.pageX, e.pageY);
 
-    mouseDown = true;
+    if (e.target.classList.contains('calendar')) {
+        mouseDown = true;
+    }
 });
 
 agendaGrid.addEventListener('mouseup', (e) => {
+    if (mouseDown) {
+        document.querySelector("#new-item-title").focus();
+    }
     mouseDown = false;
+
 });
 
 

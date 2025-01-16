@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\AgendaItemController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AgendaItemReminder;
 
@@ -21,9 +22,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('/calendar', CalendarController::class)
-    ->only(['index', 'store'])
     ->middleware('auth');
 
+Route::resource('/agenda-items', AgendaItemController::class)
+    ->middleware('auth');
 
 Route::get('/send-test-email', function () {
 

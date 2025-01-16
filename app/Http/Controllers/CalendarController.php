@@ -16,7 +16,8 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        $agendaItems = AgendaItem::where('user_id', auth()->id())->get();
+        $agendaItems = AgendaItem::where('user_id', auth()->id())->get()
+                                ->whereBetween('start', [date('Y-m-d', strtotime(request('date'))), date('Y-m-d', strtotime(request('date') . ' +7 day'))]);
         $agendaItems = $this->formatAgendaItems($agendaItems);
 
 
@@ -27,6 +28,8 @@ class CalendarController extends Controller
 
         $weekDays = $this->getWeekDays($date);
 
+        $currentDate = date("D, d M");
+
         $previousWeek = date('Y-m-d', strtotime($date . " -7 day"));
         $nextWeek = date('Y-m-d', strtotime($date . " +7 day"));
         return view(
@@ -34,6 +37,8 @@ class CalendarController extends Controller
             [
                 'previousWeek' => $previousWeek,
                 'nextWeek' => $nextWeek,
+
+                'currentDate' => $currentDate,
 
                 'weekDays' => $weekDays,
                 'agendaItems' => $agendaItems

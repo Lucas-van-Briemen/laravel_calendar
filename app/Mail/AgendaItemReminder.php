@@ -37,7 +37,7 @@ class AgendaItemReminder extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.agenda-item-reminder',
+            view: 'view.name'
         );
     }
 
