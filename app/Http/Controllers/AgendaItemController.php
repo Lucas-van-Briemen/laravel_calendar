@@ -68,8 +68,12 @@ class AgendaItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AgendaItem $agendaItem)
+    public function destroy($agendaItem)
     {
-        //
+        // Delete the agenda item with ID 1
+        $agendaItem = AgendaItem::find($agendaItem);
+        $agendaItem->delete();
+
+        return redirect()->route('calendar.index');
     }
 }
