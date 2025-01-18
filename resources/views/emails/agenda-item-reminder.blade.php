@@ -4,17 +4,22 @@
 <html>
 
 <head>
-
     <title>Test Email</title>
 
+    @vite (['resources/css/app.css', "resources/css/calendar-email.css"])
 </head>
 
 <body>
 
-    <h1>Hello!</h1>
+    <main>
+        <h1>{{ $agendaItem->title }}</h1>
 
-    <p>This is a test email from Laravel.</p>
-    <?php var_dump($agendaItem); ?>
+        <p>{{ $agendaItem->description }}</p>
+        <p>{{ "You have an event comming up at " . date($agendaItem->start) }}</p>
+
+        <a href="{{ route('agenda-items.show', ['agenda_item' => $agendaItem['id']]) }}" class='details-link'>View more details</a>
+    </main>
+
 </body>
 
 </html>

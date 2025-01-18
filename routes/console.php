@@ -34,4 +34,6 @@ Artisan::command('agenda-item-reminder', function () {
 
         Mail::to($email)->send(new AgendaItemReminder($agendaItem));
     }
+
+    $this->info('Emails sent');
 })->everyMinute();

@@ -41,7 +41,7 @@ class AgendaItemReminder extends Mailable
         return new Content(
             view: 'emails.agenda-item-reminder',
             with: [
-                'agendaItem' => $this->agendaItem,
+                'agendaItem' => $this->agendaItem
             ],
         );
     }

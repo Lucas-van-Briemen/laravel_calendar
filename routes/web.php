@@ -27,11 +27,9 @@ Route::resource('/calendar', CalendarController::class)
 Route::resource('/agenda-items', AgendaItemController::class)
     ->middleware('auth');
 
-Route::get('/send-test-email', function () {
-
-    Mail::to('vanbriemenlucas@gmail.com')->send(new AgendaItemReminder());
-
-    return 'Test email sent!';
+Route::get('/view-email-agendaitem', function () {
+    $agendaItem = App\Models\AgendaItem::find(6);
+    return  new AgendaItemReminder($agendaItem);
 });
 
 require __DIR__.'/auth.php';
