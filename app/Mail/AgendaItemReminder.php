@@ -13,12 +13,14 @@ class AgendaItemReminder extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $agendaItem;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($agendaItem)
     {
-        //
+        $this->agendaItem = $agendaItem;
     }
 
     /**
@@ -37,7 +39,10 @@ class AgendaItemReminder extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name'
+            view: 'view.name',
+            with: [
+                'agendaItem' => $this->agendaItem,
+            ],
         );
     }
 

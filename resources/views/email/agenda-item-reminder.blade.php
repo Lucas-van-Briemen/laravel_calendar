@@ -14,7 +14,7 @@
     <h1>Hello!</h1>
 
     <p>This is a test email from Laravel.</p>
-
+    <?php var_dump($agendaItem); ?>
 </body>
 
 </html>
