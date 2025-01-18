@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Models\AgendaItem;
 use App\Mail\AgendaItemReminder;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
