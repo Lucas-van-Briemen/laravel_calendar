@@ -16,12 +16,13 @@ class CalendarController extends Controller
      */
     public function index()
     {
+        $date = request('date') ? request('date') : date('Y-m-d');
+
         $agendaItems = $this->getAgendaItems();
-        $agendaItems = $this->formatAgendaItems($agendaItems);
+        $agendaItems = $this->formatAgendaItems($agendaItems, $date);
 
         dump($agendaItems);
 
-        $date = request('date') ? request('date') : date('Y-m-d');
 
         // get the first day of the week
         $date = date('Y-m-d', strtotime($date . " -" . (date('N', strtotime($date)) - 1) . " day"));
@@ -125,17 +126,53 @@ class CalendarController extends Controller
                 })
 
                 ->orWhere(function ($query) {
+                    $query->where('repeating', 'daily');
+                })
 
+                ->orWhere(function ($query) {
+                    $query->where('repeating', 'weekly');
+                })
+
+                ->orWhere(function ($query) {
+                    $query->where('repeating', 'weekdays');
                 })
 
                 ->get();
     }
 
-    private function formatAgendaItems($agendaItems)
+    private function formatAgendaItems($agendaItems, $date)
     {
         $formattedAgendaItems = [];
 
         foreach ($agendaItems as $agendaItem) {
+            // if the item is repeating weekly, we need to calculate the correct date (UNLESS the start is in the current week)
+            if ($agendaItem->repeating == 'weekly') {
+                $isThisWeek = false;
+                // if the start date is in the current week, we don't need to do anything
+                for ($i = 0; $i < 7; $i++) {
+                    if (date('Y-m-d', strtotime($date . " +$i day")) == date('Y-m-d', strtotime($agendaItem->start))) {
+                        $isThisWeek = true;
+                        break;
+                    }
+                }
+
+                if ($isThisWeek) {
+                    $dbDateStart = $agendaItem->start;
+                    $dbDateEnd = $agendaItem->end;
+
+                    // swap the date with the date of the current week (but we keep the time and dayoffset)
+                    $dbOffsetStart = date('N', strtotime($date)) - 1;
+                    $dbOffsetEnd = date('N', strtotime($date)) - 1;
+
+                    //apply the offset
+                    $agendaItem->start = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetStart . " day " . date('H:i:s', strtotime($dbDateStart))));
+                    $agendaItem->end = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetEnd . " day " . date('H:i:s', strtotime($dbDateEnd))));
+                }
+            }
+
+            $agendaItem->start = date('Y-m-d H:i:s', strtotime($agendaItem->start));
+            $agendaItem->end = date('Y-m-d H:i:s', strtotime($agendaItem->end));
+
             $startRow = 0;
             $endRow = 0;
             $startColumn = 0;
@@ -157,7 +194,9 @@ class CalendarController extends Controller
                 'startRow' => $startRow,
                 'endRow' => $endRow,
                 'startColumn' => $startColumn,
-                'endColumn' => $endColumn
+                'endColumn' => $endColumn,
+                'start' => $agendaItem->start,
+                'end' => $agendaItem->end
             ];
         }
 
