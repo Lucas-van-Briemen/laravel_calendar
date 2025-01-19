@@ -75,7 +75,8 @@ class AgendaItemController extends Controller
             'title' => '',
             'description' => '',
             'start' => '',
-            'end' => ''
+            'end' => '',
+            'repeating' => ''
         ]);
 
         $agendaItem->update($validatedData);

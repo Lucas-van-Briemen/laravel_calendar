@@ -36,6 +36,21 @@
                 <label for="end" class="form-label">End</label>
             </div>
 
+        </div>
+
+        <div class="form-group">
+            <h1>{{ "Repeat" }}</h1>
+            <div class="input-wrapper">
+                <select name="repeating" id="repeating">
+                    <option value="never">Never</option>
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="weekdays">Weekdays</option>
+                </select>
+            </div>
+
             <button type="submit" class='btn btn-save'>Save</button>
         </div>
 

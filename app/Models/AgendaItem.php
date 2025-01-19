@@ -12,5 +12,6 @@ class AgendaItem extends Model
         'description',
         'start',
         'end',
+        'repeating'
     ];
 }

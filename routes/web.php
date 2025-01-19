@@ -32,4 +32,8 @@ Route::get('/view-email-agendaitem', function () {
     return  new AgendaItemReminder($agendaItem);
 });
 
+Route::get('/database-layout', function () {
+    return view('database-layout');
+});
+
 require __DIR__.'/auth.php';

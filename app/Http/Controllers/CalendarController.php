@@ -16,10 +16,10 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        $agendaItems = AgendaItem::where('user_id', auth()->id())->get()
-                                ->whereBetween('start', [date('Y-m-d', strtotime(request('date'))), date('Y-m-d', strtotime(request('date') . ' +7 day'))]);
+        $agendaItems = $this->getAgendaItems();
         $agendaItems = $this->formatAgendaItems($agendaItems);
 
+        dump($agendaItems);
 
         $date = request('date') ? request('date') : date('Y-m-d');
 
@@ -109,6 +109,26 @@ class CalendarController extends Controller
         }
 
         return $weekDays;
+    }
+
+    private function getAgendaItems()
+    {
+        return
+            AgendaItem::
+                where('user_id', auth()->id())
+                ->where(function ($query) {
+                    $query->where('repeating', 'never');
+                    $query->whereBetween('start', [
+                        date('Y-m-d', strtotime(request('date'))),
+                        date('Y-m-d', strtotime(request('date') . ' +7 day'))
+                    ]);
+                })
+
+                ->orWhere(function ($query) {
+
+                })
+
+                ->get();
     }
 
     private function formatAgendaItems($agendaItems)

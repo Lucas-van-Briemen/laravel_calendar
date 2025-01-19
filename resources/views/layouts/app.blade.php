@@ -14,6 +14,8 @@
         {{-- Icons --}}
         <script src="https://kit.fontawesome.com/8e2fa3424b.js" crossorigin="anonymous"></script>
 
+        <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
