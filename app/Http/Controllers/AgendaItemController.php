@@ -46,7 +46,15 @@ class AgendaItemController extends Controller
      */
     public function show(AgendaItem $agendaItem)
     {
-        //
+        $agendaItem = AgendaItem::find($agendaItem)->first();
+
+        if (!$agendaItem) {
+            return redirect()->route('calendar.index');
+        }
+
+        return view('agenda-items.show', [
+            'agendaItem' => $agendaItem
+        ]);
     }
 
     /**
@@ -63,6 +71,16 @@ class AgendaItemController extends Controller
     public function update(Request $request, AgendaItem $agendaItem)
     {
         //
+        $validatedData = $request->validate([
+            'title' => '',
+            'description' => '',
+            'start' => '',
+            'end' => ''
+        ]);
+
+        $agendaItem->update($validatedData);
+
+        return redirect()->route('calendar.index');
     }
 
     /**
@@ -70,7 +88,6 @@ class AgendaItemController extends Controller
      */
     public function destroy($agendaItem)
     {
-        // Delete the agenda item with ID 1
         $agendaItem = AgendaItem::find($agendaItem);
         $agendaItem->delete();
 
