@@ -17,6 +17,7 @@ Artisan::command('agenda-item-reminder', function () {
     // Get all agenda items that are in 30 minutes
     $agendaItems = AgendaItem::where('start', '<=', now()->addMinutes(90))
         ->where('start', '>=', now()->addMinutes(60))
+        ->where('email_sent', false)
         ->get();
 
     $this->info('Found ' . $agendaItems->count() . ' agenda items that start between: ' . now()->addMinutes(30)->format('Y-m-d H:i:s')) . ' and ' . now()->addMinutes(90)->format('Y-m-d H:i:s');
@@ -30,6 +31,10 @@ Artisan::command('agenda-item-reminder', function () {
         $email = $user->email;
 
         Mail::to($email)->send(new AgendaItemReminder($agendaItem));
+
+        // Update the email_sent column
+        $agendaItem->email_sent = true;
+        $agendaItem->save();
     }
 
     $this->info('Emails sent');
