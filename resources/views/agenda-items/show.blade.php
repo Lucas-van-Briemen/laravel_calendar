@@ -41,7 +41,7 @@
         <div class="form-group">
             <h1>{{ "Repeat" }}</h1>
             <div class="input-wrapper">
-                <select name="repeating" id="repeating">
+                <select name="repeating" id="repeating" value='{{ $agendaItem["repeating"] }}'>
                     <option value="never">Never</option>
                     <option value="daily">Daily</option>
                     <option value="weekly">Weekly</option>
@@ -49,6 +49,9 @@
                     <option value="yearly">Yearly</option>
                     <option value="weekdays">Weekdays</option>
                 </select>
+                <label for="repeating" class="form-label">Repeating</label>
+
+                <script>document.getElementById('repeating').value = '{{ $agendaItem["repeating"] }}';</script>
             </div>
 
             <button type="submit" class='btn btn-save'>Save</button>

@@ -23,16 +23,40 @@ form {
     width: 50%;
 
     .form-group {
-
         margin-top: 1.5rem;
-        padding: 1rem;
+        padding: 2rem;
         border-radius: 32px;
         width: 100%;
         background-color: var(--background-color-one);
 
+        input, select, textarea, select {
+            background-color: var(--background-color-one);
+            border: 1px solid var(--background-color);
+            padding: 1rem;
+
+            &:focus+label,
+            &:not(:placeholder-shown)+label {
+                color: var(--header-text);
+                transform: translateY(-1rem);
+                font-size: .75rem;
+                background-color: var(--input);
+                padding: 0 .5rem;
+                border-radius: 8px;
+            }
+        }
+
+        label{
+            margin: 0.5rem 0 0 0.25rem;
+        }
+
+        button{
+            background-color: var(--background-color-two);
+        }
+
         h1{
             color: var(--header-text);
             font-size: 1.5rem;
+            margin-left: 1rem;
         }
     }
 }
