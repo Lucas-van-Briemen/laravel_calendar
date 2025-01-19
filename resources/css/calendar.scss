@@ -233,11 +233,13 @@
             margin: 0.5rem 0.5rem 0 0.5rem;
         }
 
-        .agenda-item-description {
+        .agenda-item-description,
+        .agenda-item-time {
             font-size: 1rem;
             color: var(--gray-text);
             margin: 0 0.5rem
         }
+
     }
 
     .agenda-item {

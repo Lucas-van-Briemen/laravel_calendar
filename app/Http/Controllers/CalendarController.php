@@ -27,9 +27,6 @@ class CalendarController extends Controller
         $agendaItems = $this->getAgendaItems();
         $agendaItems = $this->formatAgendaItems($agendaItems, $date);
 
-        dump($agendaItems);
-
-
         // get the first day of the week
         $date = date('Y-m-d', strtotime($date . " -" . (date('N', strtotime($date)) - 1) . " day"));
 

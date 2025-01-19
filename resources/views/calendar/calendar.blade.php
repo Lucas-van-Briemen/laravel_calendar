@@ -35,7 +35,7 @@
                     <p class="agenda-item-description">{{ $agendaItem["description"] }}</p>
 
                     <div class="agenda-item-time">
-                        <p>{{ $agendaItem["start"] }} - {{ $agendaItem["end"] }}</p>
+                        <p>{{ date('H:i', strtotime($agendaItem["start"])) }} - {{ date('H:i', strtotime($agendaItem["end"])) }}</p>
                     </div>
                 </div>
 
