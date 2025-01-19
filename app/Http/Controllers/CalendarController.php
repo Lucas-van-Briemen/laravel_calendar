@@ -16,7 +16,13 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        $date = request('date') ? request('date') : date('Y-m-d');
+        if (request('date')) {
+            $date = request('date');
+        } else {
+            // first day of the week
+            $dateOffset = date('N') - 1;
+            $date = date('Y-m-d', strtotime(date('Y-m-d') . " -$dateOffset day"));
+        }
 
         $agendaItems = $this->getAgendaItems();
         $agendaItems = $this->formatAgendaItems($agendaItems, $date);
@@ -145,29 +151,18 @@ class CalendarController extends Controller
         $formattedAgendaItems = [];
 
         foreach ($agendaItems as $agendaItem) {
-            // if the item is repeating weekly, we need to calculate the correct date (UNLESS the start is in the current week)
+            // if the item is repeating weekly, we need to calculate the correct date
             if ($agendaItem->repeating == 'weekly') {
-                $isThisWeek = false;
-                // if the start date is in the current week, we don't need to do anything
-                for ($i = 0; $i < 7; $i++) {
-                    if (date('Y-m-d', strtotime($date . " +$i day")) == date('Y-m-d', strtotime($agendaItem->start))) {
-                        $isThisWeek = true;
-                        break;
-                    }
-                }
+                $dbDateStart = $agendaItem->start;
+                $dbDateEnd = $agendaItem->end;
 
-                if ($isThisWeek) {
-                    $dbDateStart = $agendaItem->start;
-                    $dbDateEnd = $agendaItem->end;
+                // swap the date with the date of the current week (but we keep the time and dayoffset)
+                $dbOffsetStart = date('N', strtotime($date)) - 1;
+                $dbOffsetEnd = date('N', strtotime($date)) - 1;
 
-                    // swap the date with the date of the current week (but we keep the time and dayoffset)
-                    $dbOffsetStart = date('N', strtotime($date)) - 1;
-                    $dbOffsetEnd = date('N', strtotime($date)) - 1;
-
-                    //apply the offset
-                    $agendaItem->start = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetStart . " day " . date('H:i:s', strtotime($dbDateStart))));
-                    $agendaItem->end = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetEnd . " day " . date('H:i:s', strtotime($dbDateEnd))));
-                }
+                //apply the offset
+                $agendaItem->start = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetStart . " day " . date('H:i:s', strtotime($dbDateStart))));
+                $agendaItem->end = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetEnd . " day " . date('H:i:s', strtotime($dbDateEnd))));
             }
 
             $agendaItem->start = date('Y-m-d H:i:s', strtotime($agendaItem->start));
