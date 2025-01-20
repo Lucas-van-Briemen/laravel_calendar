@@ -27,8 +27,6 @@ class CalendarController extends Controller
         $agendaItems = $this->getAgendaItems();
         $agendaItems = $this->formatAgendaItems($agendaItems, $date);
 
-        dump($agendaItems);
-
         // get the first day of the week
         $date = date('Y-m-d', strtotime($date . " -" . (date('N', strtotime($date)) - 1) . " day"));
 
@@ -153,14 +151,55 @@ class CalendarController extends Controller
                     $query->whereRaw('DAY(start) BETWEEN ? AND ? AND MONTH(start) BETWEEN ? AND ?', [$startDay, $endDay, $startMonth, $endMonth]);
                 })
 
+                ->orWhere(function ($query) {
+                    $query->where('repeating', 'daily');
+                })
+
+                ->orWhere(function ($query) {
+                    $query->where('repeating', 'weekdays');
+                })
+
                 ->get();
     }
 
     private function formatAgendaItems($agendaItems, $date)
     {
-        $formattedAgendaItems = [];
-
+        $agendaItemsLooped = [];
         foreach ($agendaItems as $agendaItem) {
+            $shouldCreateMultipleArray = ["daily", "weekdays"];
+
+            if (!in_array($agendaItem->repeating, $shouldCreateMultipleArray)) {
+                $agendaItemsLooped[] = $agendaItem;
+            }
+
+            if ($agendaItem->repeating == 'daily') {
+                for ($i = 0; $i < 7; $i++) {
+                    $agendaItemCopy = clone $agendaItem;
+
+                    //Add I days to the start and end
+                    $agendaItemCopy->start = date('Y-m-d H:i:s', strtotime($agendaItemCopy->start . " +$i day"));
+
+                    $agendaItemCopy->end = date('Y-m-d H:i:s', strtotime($agendaItemCopy->end . " +$i day"));
+
+                    $agendaItemsLooped[] = $agendaItemCopy;
+                }
+            }
+
+            if ($agendaItem->repeating == 'weekdays') {
+                for ($i = 0; $i < 5; $i++) {
+                    $agendaItemCopy = clone $agendaItem;
+
+                    //Add I days to the start and end
+                    $agendaItemCopy->start = date('Y-m-d H:i:s', strtotime($agendaItemCopy->start . " +$i day"));
+                    $agendaItemCopy->end = date('Y-m-d H:i:s', strtotime($agendaItemCopy->end . " +$i day"));
+
+                    $agendaItemsLooped[] = $agendaItemCopy;
+                }
+            }
+        }
+
+        $formattedAgendaItems = [];
+        foreach ($agendaItemsLooped as $agendaItem) {
             // if the item is repeating weekly, we need to calculate the correct date
             if ($agendaItem->repeating == 'weekly') {
                 $dbDateStart = $agendaItem->start;
