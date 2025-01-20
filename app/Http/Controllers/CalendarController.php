@@ -136,11 +136,21 @@ class CalendarController extends Controller
 
                 ->orWhere(function ($query) {
                     $query->where('repeating', 'monthly');
-                    // Only check for the Day (not the Month or time)
                     $startDay = date('j', strtotime(request('date')));
                     $endDay = date('j', strtotime(request('date') . ' +6 day'));
 
                     $query->whereRaw('DAY(start) BETWEEN ? AND ?', [$startDay, $endDay]);
+                })
+
+                ->orWhere(function ($query) {
+                    $query->where('repeating', 'yearly');
+                    $startDay = date('j', strtotime(request('date')));
+                    $endDay = date('j', strtotime(request('date') . ' +6 day'));
+
+                    $startMonth = date('m', strtotime(request('date')));
+                    $endMonth = date('m', strtotime(request('date') . ' +6 day'));
+
+                    $query->whereRaw('DAY(start) BETWEEN ? AND ? AND MONTH(start) BETWEEN ? AND ?', [$startDay, $endDay, $startMonth, $endMonth]);
                 })
 
                 ->get();
@@ -178,6 +188,23 @@ class CalendarController extends Controller
 
                 $agendaItem->start = date("Y-m-{$startDay} {$dbTimeStart}", strtotime($date));
                 $agendaItem->end = date("Y-m-{$endDay} {$dbTimeEnd}", strtotime($date));
+            }
+
+            if ($agendaItem->repeating === 'yearly') {
+                $dbDateStart = $agendaItem->start;
+                $dbDateEnd = $agendaItem->end;
+
+                $dbTimeStart = date('H:i:s', strtotime($dbDateStart));
+                $dbTimeEnd = date('H:i:s', strtotime($dbDateEnd));
+
+                $startDay = date('j', strtotime($dbDateStart));
+                $endDay = date('j', strtotime($dbDateEnd));
+
+                $startMonth = date('m', strtotime($dbDateStart));
+                $endMonth = date('m', strtotime($dbDateEnd));
+
+                $agendaItem->start = date("Y-{$startMonth}-{$startDay} {$dbTimeStart}", strtotime($date));
+                $agendaItem->end = date("Y-{$endMonth}-{$endDay} {$dbTimeEnd}", strtotime($date));
             }
 
 
