@@ -27,6 +27,8 @@ class CalendarController extends Controller
         $agendaItems = $this->getAgendaItems();
         $agendaItems = $this->formatAgendaItems($agendaItems, $date);
 
+        dump($agendaItems);
+
         // get the first day of the week
         $date = date('Y-m-d', strtotime($date . " -" . (date('N', strtotime($date)) - 1) . " day"));
 
@@ -129,15 +131,16 @@ class CalendarController extends Controller
                 })
 
                 ->orWhere(function ($query) {
-                    $query->where('repeating', 'daily');
-                })
-
-                ->orWhere(function ($query) {
                     $query->where('repeating', 'weekly');
                 })
 
                 ->orWhere(function ($query) {
-                    $query->where('repeating', 'weekdays');
+                    $query->where('repeating', 'monthly');
+                    // Only check for the Day (not the Month or time)
+                    $startDay = date('j', strtotime(request('date')));
+                    $endDay = date('j', strtotime(request('date') . ' +6 day'));
+
+                    $query->whereRaw('DAY(start) BETWEEN ? AND ?', [$startDay, $endDay]);
                 })
 
                 ->get();
@@ -161,6 +164,22 @@ class CalendarController extends Controller
                 $agendaItem->start = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetStart . " day " . date('H:i:s', strtotime($dbDateStart))));
                 $agendaItem->end = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetEnd . " day " . date('H:i:s', strtotime($dbDateEnd))));
             }
+
+            // If the item is repeating monthly, calculate the correct date
+            if ($agendaItem->repeating === 'monthly') {
+                $dbDateStart = $agendaItem->start;
+                $dbDateEnd = $agendaItem->end;
+
+                $dbTimeStart = date('H:i:s', strtotime($dbDateStart));
+                $dbTimeEnd = date('H:i:s', strtotime($dbDateEnd));
+
+                $startDay = date('j', strtotime($dbDateStart));
+                $endDay = date('j', strtotime($dbDateEnd));
+
+                $agendaItem->start = date("Y-m-{$startDay} {$dbTimeStart}", strtotime($date));
+                $agendaItem->end = date("Y-m-{$endDay} {$dbTimeEnd}", strtotime($date));
+            }
+
 
             $agendaItem->start = date('Y-m-d H:i:s', strtotime($agendaItem->start));
             $agendaItem->end = date('Y-m-d H:i:s', strtotime($agendaItem->end));
