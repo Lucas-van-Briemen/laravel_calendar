@@ -25,6 +25,9 @@
     </div>
 
     <div class="calendar">
+
+        <div class="current-time-line" style="grid-row: {{ $timeLineRow }}; grid-column: {{ $timeLineColumn }};"></div>
+
         @foreach($agendaItems as $agendaItem)
             <div class="agenda-item"
                 style="grid-row: {{ $agendaItem["startRow"] }} / {{ $agendaItem["endRow"] }}; grid-column: {{ $agendaItem["startColumn"] }} / {{ $agendaItem["endColumn"] }};"

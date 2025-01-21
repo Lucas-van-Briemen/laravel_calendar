@@ -45,7 +45,10 @@ class CalendarController extends Controller
                 'currentDate' => $currentDate,
 
                 'weekDays' => $weekDays,
-                'agendaItems' => $agendaItems
+                'agendaItems' => $agendaItems,
+
+                'timeLineColumn' => date('N', strtotime($date)) + 1,
+                'timeLineRow' => (date('H') * 4 + 1 + round(date('i') / 15)) + 4
             ]
         );
     }
