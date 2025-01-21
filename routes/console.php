@@ -35,8 +35,8 @@ Artisan::command('agenda-item-reminder', function () {
         // Mail::to($email)->send(new AgendaItemReminder($agendaItem));
 
         // Update the email_sent column
-        $agendaItem->email_sent = true;
-        $agendaItem->save();
+        // $agendaItem->email_sent = true;
+        // $agendaItem->save();
     }
 
     $this->info('Emails sent');
