@@ -6,6 +6,7 @@ use App\Models\AgendaItem;
 use App\Mail\AgendaItemReminder;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use Carbon\Carbon;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
@@ -32,11 +33,40 @@ Artisan::command('agenda-item-reminder', function () {
         $user = User::find($userID);
         $email = $user->email;
 
-        // Mail::to($email)->send(new AgendaItemReminder($agendaItem));
+        Mail::to($email)->send(new AgendaItemReminder($agendaItem));
 
-        // Update the email_sent column
-        // $agendaItem->email_sent = true;
-        // $agendaItem->save();
+        // Calculate the next time to send the email (if repeat is not "never")
+        if ($agendaItem->repeating == 'never') {
+            // Delete the agenda item
+            $agendaItem->should_send_at = null;
+        }
+
+        if ($agendaItem->repeating == 'daily') {
+            // Add 1 day to the should_send_at
+            $agendaItem->should_send_at = Carbon::parse($agendaItem->should_send_at)->addDay();
+        }
+
+        if ($agendaItem->repeating == 'weekdays') {
+            // Add 1 day to the should_send_at
+            $agendaItem->should_send_at = Carbon::parse($agendaItem->should_send_at)->addWeekday();
+        }
+
+        if ($agendaItem->repeating == 'weekly') {
+            // Add 1 week to the should_send_at
+            $agendaItem->should_send_at = Carbon::parse($agendaItem->should_send_at)->addWeek();
+        }
+
+        if ($agendaItem->repeating == 'monthly') {
+            // Add 1 month to the should_send_at
+            $agendaItem->should_send_at = Carbon::parse($agendaItem->should_send_at)->addMonth();
+        }
+
+        if ($agendaItem->repeating == 'yearly') {
+            // Add 1 year to the should_send_at
+            $agendaItem->should_send_at = Carbon::parse($agendaItem->should_send_at)->addYear();
+        }
+
+        $agendaItem->save();
     }
 
     $this->info('Emails sent');
