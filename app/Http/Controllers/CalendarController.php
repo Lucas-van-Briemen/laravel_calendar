@@ -209,8 +209,8 @@ class CalendarController extends Controller
                 $dbDateEnd = $agendaItem->end;
 
                 // swap the date with the date of the current week (but we keep the time and dayoffset)
-                $dbOffsetStart = date('N', strtotime($date)) - 1;
-                $dbOffsetEnd = date('N', strtotime($date)) - 1;
+                $dbOffsetStart = date('N', strtotime($dbDateStart)) - 1;
+                $dbOffsetEnd = date('N', strtotime($dbDateEnd)) - 1;
 
                 //apply the offset
                 $agendaItem->start = date('Y-m-d H:i:s', strtotime($date . " +" . $dbOffsetStart . " day " . date('H:i:s', strtotime($dbDateStart))));
