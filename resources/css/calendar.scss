@@ -9,13 +9,14 @@
     border-radius: 25px;
 
     .week-selecter {
-        width: 20vw;
+        width: 18vw;
+        margin: 0 1vw;
         display: flex;
         justify-content: center;
         align-items: center;
 
         a {
-            width: 30%;
+            width: 32%;
             height: 50%;
             margin: 1%;
             display: flex;
@@ -25,6 +26,7 @@
             text-decoration: none;
             color: var(--gray-text);
             border-radius: 8px;
+            font-size: 1.2rem;
             transition: all 0.2s ease-in-out;
         }
 

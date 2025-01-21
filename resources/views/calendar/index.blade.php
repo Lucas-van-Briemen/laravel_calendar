@@ -1,4 +1,5 @@
 {{-- Load the CSS --}}
+@vite('resources/css/calendar-menu.css')
 @vite('resources/css/calendar.css')
 
 <x-app-layout>
