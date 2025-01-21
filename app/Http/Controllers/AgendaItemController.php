@@ -41,10 +41,9 @@ class AgendaItemController extends Controller
         $shouldSendAt = date('Y-m-d H:i:s', strtotime($validatedData['start'] . " -30 minutes"));
         $validatedData['should_send_at'] = $shouldSendAt;
 
-        dump($validatedData);
         $request->user()->agendaItems()->create($validatedData);
 
-        // return redirect()->route('calendar.index');
+        return redirect()->route('calendar.index');
     }
 
     /**
