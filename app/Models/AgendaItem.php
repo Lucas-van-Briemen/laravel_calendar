@@ -12,6 +12,7 @@ class AgendaItem extends Model
         'description',
         'start',
         'end',
-        'repeating'
+        'repeating',
+        'should_send_at'
     ];
 }

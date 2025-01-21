@@ -16,11 +16,13 @@ Artisan::command('inspire', function () {
 Artisan::command('agenda-item-reminder', function () {
     // Get all agenda items that are in 30 minutes
     $agendaItems = AgendaItem::where('start', '<=', now()->addMinutes(90))
-        ->where('start', '>=', now()->addMinutes(60))
-        ->where('email_sent', false)
+        ->whereBetween('should_send_at', [
+            now()->addMinutes(-30)->format('Y-m-d H:i:s'),
+            now()->addMinutes(90)->format('Y-m-d H:i:s')
+        ])
         ->get();
 
-    $this->info('Found ' . $agendaItems->count() . ' agenda items that start between: ' . now()->addMinutes(30)->format('Y-m-d H:i:s')) . ' and ' . now()->addMinutes(90)->format('Y-m-d H:i:s');
+    $this->info('Found ' . $agendaItems->count() . ' agenda items');
 
     // Send an email to the user
     foreach ($agendaItems as $agendaItem) {
@@ -30,7 +32,7 @@ Artisan::command('agenda-item-reminder', function () {
         $user = User::find($userID);
         $email = $user->email;
 
-        Mail::to($email)->send(new AgendaItemReminder($agendaItem));
+        // Mail::to($email)->send(new AgendaItemReminder($agendaItem));
 
         // Update the email_sent column
         $agendaItem->email_sent = true;
