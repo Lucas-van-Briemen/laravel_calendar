@@ -23,6 +23,7 @@
             color: var(--gray-text);
             z-index: 10;
             transition: all 0.2s ease-in-out;
+            cursor: pointer;
         }
 
         .calendar-manager-active {
@@ -37,6 +38,21 @@
             left: 0;
             overflow: hidden;
             border-radius: 16px;
+        }
+    }
+
+    .manager-item{
+        background-color: var(--background-color-two);
+        width: 18vw;
+        margin: auto;
+
+        border-radius: 16px;
+        margin-top: 1rem;
+
+        .manager-item-title {
+            font-size: 1.2rem;
+            color: var(--gray-text);
+            padding: 1rem 1vw;
         }
     }
 }
