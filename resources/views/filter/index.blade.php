@@ -11,7 +11,13 @@
                     <form action="{{ route('manage-filters.update', $filter->id) }}" method="POST">
                         @csrf
                         @method('PATCH')
-                        <input type="hidden" name="color" value="{{ $filter->color }}">
+                        <x-color-picker name="color" :options="[
+                            'opacity' => false,
+                            'value' => '#000000',
+                            'default' => '#000000',
+                            'theme' => 'classic',
+                            'swatches' => null,
+                        ]" />
                         <button type="submit"><i class="fa fa-paint-brush"></i></button>
                     </form>
                 </div>
