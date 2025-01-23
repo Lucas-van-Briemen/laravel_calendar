@@ -9,6 +9,18 @@ use App\Models\Filter;
 class FilterController extends Controller
 {
     //
+    public function update(Request $request, $filter)
+    {
+        $validatedData = $request->validate([
+            'name' => '',
+            'color' => '',
+        ]);
+
+        $filter = Filter::find($filter);
+        $filter->update($validatedData);
+
+        return redirect()->route('manage-filters.index');
+    }
 
     public function destroy($filter)
     {
