@@ -8,6 +8,12 @@
     <div class='calendar-manager-display'>
         <div class='manager-item'>
             <h1 class='manager-item-title'>Filter</h1>
+            <div class='manager-item-content'>
+                {{ foreach($filters as $filter) }}
+                    <input type="checkbox" name="filter" value="{{ $filter->id }}" id="filter-{{ $filter->id }}">
+                    <label for="filter-{{ $filter->id }}">{{ $filter->name }}</label>
+                {{ endforeach }}
+            </div>
         </div>
 
         <div class='manager-item'>
