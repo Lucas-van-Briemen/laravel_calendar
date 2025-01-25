@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\AgendaItemController;
+use App\Http\Controllers\FilterController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AgendaItemReminder;
 
@@ -32,8 +33,7 @@ Route::get('/view-email-agendaitem', function () {
     return  new AgendaItemReminder($agendaItem);
 });
 
-Route::get('/database-layout', function () {
-    return view('database-layout');
-});
+Route::resource('/manage-filters', FilterController::class)
+    ->middleware('auth');
 
 require __DIR__.'/auth.php';
