@@ -1,0 +1,39 @@
+.filter-wrapper {
+    width: 50%;
+    margin: auto;
+    position: relative;
+
+    .filter-item {
+        margin-top: 1.5rem;
+        padding: 2rem;
+        border-radius: 32px;
+        width: 100%;
+        background-color: var(--background-color-one);
+
+        .filter-header {
+            font-size: 1.5rem;
+            color: var(--header-text);
+        }
+
+        .filter-color {
+            color: var(--gray-text);
+            cursor: pointer;
+        }
+
+        .filter-delete {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 2rem;
+            font-size: 1.5rem;
+            color: var(--gray-text);
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                color: var(--header-text);
+            }
+        }
+    }
+}
+
