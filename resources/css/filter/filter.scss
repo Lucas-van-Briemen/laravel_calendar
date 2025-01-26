@@ -1,14 +1,18 @@
 .filter-wrapper {
     width: 50%;
     margin: auto;
-    position: relative;
 
-    .filter-item {
+    .filter-item, .filter-item-create {
         margin-top: 1.5rem;
         padding: 2rem;
         border-radius: 32px;
         width: 100%;
         background-color: var(--background-color-one);
+        position: relative;
+
+        display: flex;
+        justify-content: space-between;
+
 
         .filter-header {
             font-size: 1.5rem;
@@ -20,11 +24,8 @@
             cursor: pointer;
         }
 
-        .filter-delete {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            right: 2rem;
+        .filter-delete, .filter-save, .filter-update {
+            margin: auto 0;
             font-size: 1.5rem;
             color: var(--gray-text);
             cursor: pointer;

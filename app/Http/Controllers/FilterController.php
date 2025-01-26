@@ -8,6 +8,21 @@ use App\Models\Filter;
 
 class FilterController extends Controller
 {
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => '',
+            'color' => '',
+        ]);
+
+        $validatedData['user_id'] = auth()->id();
+
+        Filter::create($validatedData);
+
+        return redirect()->route('manage-filters.index');
+    }
+
     //
     public function update(Request $request, $filter)
     {
