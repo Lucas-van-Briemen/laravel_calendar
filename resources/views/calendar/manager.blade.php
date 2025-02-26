@@ -16,17 +16,6 @@
         <div class='manager-item'>
             <h1 class='manager-item-title'>Calendars</h1>
         </div>
-
-            <div class='manager-item'>
-            <h1 class='manager-item-title'>Display</h1>
-            <div class='manager-item-content'>
-                <select name="view">
-                    <option value="month">Month</option>
-                    <option value="week">Week</option>
-                    <option value="day">Day</option>
-                </select>
-            </div>
-        </div>
     </div>
 
 </div>

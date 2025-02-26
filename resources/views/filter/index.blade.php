@@ -37,16 +37,17 @@
 
             <form action="{{ route('manage-filters.store') }}" method="POST" class="filter-item-create">
                 @csrf
-<div class="input-wrapper">
-    <input type="text" name="title" placeholder=" " id="title" value="Test">
-    <label for="title" class="form-label">Title</label>
-</div>                <x-color-picker name="color" :options="[
-        'opacity' => false,
-        'value' => '#000000',
-        'default' => '#000000',
-        'theme' => 'classic',
-        'swatches' => null,
-    ]" />
+                <div class="input-wrapper">
+                    <input type="text" name="title" placeholder=" " id="title" value="Test">
+                    <label for="title" class="form-label">Title</label>
+                </div>
+                <x-color-picker name="color" :options="[
+                    'opacity' => false,
+                    'value' => '#000000',
+                    'default' => '#000000',
+                    'theme' => 'classic',
+                    'swatches' => null,
+                ]" />
                 <button type="submit" class='filter-save'><i class="fa fa-plus"></i></button>
             </form>
 
